@@ -17,10 +17,10 @@ public final class Constants {
     public static double THROTTLE = 1.0;
     
     /** The first port of the left drivetrain motor. */
-    public static final int LEFT_MOTOR_PORT_1 = 0;
+    public static final int LEFT_MOTOR_PORT_1 = 1;
 
     /** The second port of the left drivetrain motor. */
-    public static final int LEFT_MOTOR_PORT_2 = 1; 
+    public static final int LEFT_MOTOR_PORT_2 = 2; 
 
     /** The first port of the right drivetrain motor. */
     public static final int RIGHT_MOTOR_PORT_1 = 3; 
@@ -35,7 +35,8 @@ public final class Constants {
     public static final boolean SAFETY_TOGGLE = false; 
 
     /** The toggle for reversed movement controls. */
-    public static final boolean INVERTED_DRIVE = false; 
+    public static final int RIGHT_MULTIPLER = 1; 
+    public static final int LEFT_MULTIPLER = -1; 
 
     /** Toggles the tank drive on the robot. */
     public static final boolean IS_TANK = false;

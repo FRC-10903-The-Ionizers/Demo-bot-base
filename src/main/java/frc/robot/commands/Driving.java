@@ -4,21 +4,21 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 
 /** Handler for most events involving driving and chassis-motor manipulation. */
-public class Driving extends CommandBase {
+public class Driving extends Command {
     // Initialize our variables for controlling drivetrain.
     private DriveTrain driveTrain;
     private double movementSpeed;
     private double rotationalSpeed;
 
     // Initialize our speed variables for controlling motor speeds.
-    private double horizontal;
-    private double vertical;
+    private double left;
+    private double right;
 
     /**
      * Initialize our driving commands through our DriveTrain subsystem.
@@ -37,28 +37,11 @@ public class Driving extends CommandBase {
     public void execute() {
         // Get the current position of the joystick axis.
         // TODO: switch to XboxController. 
-
-        horizontal = RobotContainer.manipulatorControl.getX();
-        vertical = -RobotContainer.manipulatorControl.getY(); 
-
-        System.out.println(horizontal + " : horizontal, " + vertical + " : vertical"); 
-
-        // Reverse the movement speed if the robot is in tank drive.
-        movementSpeed *= vertical * (Constants.IS_TANK ? -1 : 1);
-
-        // Set the rotational speed to the x displacement.
-        rotationalSpeed = horizontal;
-
-        // Apply a deadband to the speed modifiers if they are negligible. 
-        double[] speeds = new double[]{ movementSpeed, rotationalSpeed };
-        speeds = deadband(speeds);
-
-        // Calculates the power to apply to each set of motors. 
-        double leftPower = -(rotationalSpeed - movementSpeed) * Constants.THROTTLE;
-        double rightPower = -(rotationalSpeed + movementSpeed) * Constants.THROTTLE;
+        left = RobotContainer.driverControl.getLeftY() * Constants.THROTTLE;
+        right = RobotContainer.driverControl.getRightY() * Constants.THROTTLE;
 
         // Runs each set of motors based on their calculated power levels. 
-        driveTrain.tankDrive(leftPower, rightPower);
+        driveTrain.tankDrive(left, right);
     }
 
     /**

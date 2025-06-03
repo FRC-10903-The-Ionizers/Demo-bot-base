@@ -25,9 +25,8 @@ public class RobotContainer {
     private final ExampleCommand autoCommand = new ExampleCommand(exampleSubsystem);
 
     // Initialize our joystick for manipulation and controller for drivetrain.
-    public static final Joystick manipulatorControl = new Joystick(0);
-    public static final XboxController driverControl = new XboxController(1); 
-
+    // public static final Joystick manipulatorControl = new Joystick(0);
+    public static final XboxController driverControl = new XboxController(0);
     // Create new subsystems for the robot to pull from.
     private static DriveTrain driveTrain = new DriveTrain(); 
 

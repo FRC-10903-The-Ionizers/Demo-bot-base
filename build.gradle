@@ -1,10 +1,20 @@
 plugins {
     id "java"
+<<<<<<< HEAD
     id "edu.wpi.first.GradleRIO" version "2023.2.1"
 }
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
+=======
+    id "edu.wpi.first.GradleRIO" version "2025.2.1"
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+>>>>>>> f5d6313 (Working code on the robot)
 
 def ROBOT_MAIN_CLASS = "frc.robot.Main"
 
@@ -31,6 +41,11 @@ deploy {
                 frcStaticFileDeploy(getArtifactTypeClass('FileTreeArtifact')) {
                     files = project.fileTree('src/main/deploy')
                     directory = '/home/lvuser/deploy'
+<<<<<<< HEAD
+=======
+                    deleteOldFiles = false // Change to true to delete files on roboRIO that no
+                                           // longer exist in deploy directory of this project
+>>>>>>> f5d6313 (Working code on the robot)
                 }
             }
         }
@@ -48,6 +63,10 @@ def includeDesktopSupport = false
 // Defining my dependencies. In this case, WPILib (+ friends), and vendor libraries.
 // Also defines JUnit 5.
 dependencies {
+<<<<<<< HEAD
+=======
+    annotationProcessor wpi.java.deps.wpilibAnnotations()
+>>>>>>> f5d6313 (Working code on the robot)
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
 
@@ -65,9 +84,14 @@ dependencies {
     nativeRelease wpi.java.vendor.jniRelease(wpi.platforms.desktop)
     simulationRelease wpi.sim.enableRelease()
 
+<<<<<<< HEAD
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+=======
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+>>>>>>> f5d6313 (Working code on the robot)
 }
 
 test {
@@ -84,6 +108,10 @@ wpi.sim.addDriverstation()
 // knows where to look for our Robot Class.
 jar {
     from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+<<<<<<< HEAD
+=======
+    from sourceSets.main.allSource
+>>>>>>> f5d6313 (Working code on the robot)
     manifest edu.wpi.first.gradlerio.GradleRIOPlugin.javaManifest(ROBOT_MAIN_CLASS)
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }

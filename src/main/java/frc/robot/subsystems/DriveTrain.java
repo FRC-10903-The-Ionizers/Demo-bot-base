@@ -37,26 +37,14 @@ public class DriveTrain extends SubsystemBase {
     }
 
     /** 
-     * Use the arcade drive mechanic to maneuver the robot's drivetrain. 
-
-     * @param movementSpeed - The movement speed of the arcade drive system.
-     * @param rotationalSpeed - The rotational speed of the arcade drive system.
-     */
-    public void arcadeDrive(double movementSpeed, double rotationalSpeed) {
-        // Invert the movement speed if the invertedDrive setting is enabled.
-        movementSpeed *= Constants.INVERTED_DRIVE ? -1 : 1;
-        arcadeDrive(movementSpeed, rotationalSpeed);
-    }
-
-    /** 
      * Use the tank drive mechanic to maneuver the robot's drivetrain. 
 
      * @param movementSpeedLeft - The movement speed of the left set of motors. 
      * @param movementSpeedRight - The movement speed of the right set of motors. 
      */
     public void tankDrive(double movementSpeedLeft, double movementSpeedRight) {
-        int multiplier = Constants.INVERTED_DRIVE ? -1 : 1;
-        tankDrive(movementSpeedLeft * multiplier, movementSpeedRight * multiplier);
+        leftMotors.set(movementSpeedLeft * Constants.LEFT_MULTIPLER);
+        rightMotors.set(movementSpeedRight * Constants.RIGHT_MULTIPLER);
     }
 
     /**
