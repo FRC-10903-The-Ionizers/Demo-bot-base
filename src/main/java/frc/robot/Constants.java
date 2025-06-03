@@ -37,9 +37,6 @@ public final class Constants {
     /** The toggle for reversed movement controls. */
     public static final int RIGHT_MULTIPLER = 1; 
     public static final int LEFT_MULTIPLER = -1; 
-
-    /** Toggles the tank drive on the robot. */
-    public static final boolean IS_TANK = false;
     
     /** The deadband for the joysticks to prevent small, irregular movements. */
     public static final double DEADBAND = 0.2; 

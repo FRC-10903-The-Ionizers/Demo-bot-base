@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import frc.robot.Constants;
 
-/** Subsystem designed for controlling the bottom driving motors and fetching encoder values. */
+/* Subsystem designed for controlling the bottom driving motors*/
 public class DriveTrain extends SubsystemBase {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
 
@@ -22,14 +22,14 @@ public class DriveTrain extends SubsystemBase {
     private final Spark left2 = new Spark(Constants.LEFT_MOTOR_PORT_2);
     private final Spark right2 = new Spark(Constants.RIGHT_MOTOR_PORT_2);
 
-    // Package our motors into MotorControllerGroups to be added to a DifferentialDrive.
+    // Package our motors into MotorControllerGroups to be added to a DifferentialDrive. We should eventually change this as it is depricated.
     private final MotorControllerGroup leftMotors = new MotorControllerGroup(left1, left2);
     private final MotorControllerGroup rightMotors = new MotorControllerGroup(right1, right2);
     private final DifferentialDrive diffDrive = new DifferentialDrive(leftMotors, rightMotors);
 
-    // Initialize our gyroscope for measuring the angle of the bot.
     /** 
-     * Changes settings on the motors + encoders when instantiated.
+     * Constructor for the DriveTrain subsystem. 
+     * This is where we set up the motors and their properties.
      */
     public DriveTrain() {
         // Set the safety toggle and expiration on the motors + drivetrain.

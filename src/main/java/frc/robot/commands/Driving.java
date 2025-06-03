@@ -13,10 +13,8 @@ import frc.robot.subsystems.DriveTrain;
 public class Driving extends Command {
     // Initialize our variables for controlling drivetrain.
     private DriveTrain driveTrain;
-    private double movementSpeed;
-    private double rotationalSpeed;
 
-    // Initialize our speed variables for controlling motor speeds.
+    // Initialize variables for left and right motor speed
     private double left;
     private double right;
 
@@ -31,14 +29,16 @@ public class Driving extends Command {
     }
 
     /** 
-     * Apply the displacement of the controller sticks and apply it to our drivetrain.
+     * Find controller positions and drive at that speed. This is run every time the command is scheduled, which is in a loop.
      */
     @Override 
     public void execute() {
         // Get the current position of the joystick axis.
-        // TODO: switch to XboxController. 
         left = RobotContainer.driverControl.getLeftY() * Constants.THROTTLE;
         right = RobotContainer.driverControl.getRightY() * Constants.THROTTLE;
+
+        left = deadband(left); // Apply deadband to left motor speed.
+        right = deadband(right); // Apply deadband to right motor speed.
 
         // Runs each set of motors based on their calculated power levels. 
         driveTrain.tankDrive(left, right);
@@ -49,13 +49,10 @@ public class Driving extends Command {
 
      * @param speeds - An array of speeds to compare to the deadband constant.
      */
-    public double[] deadband(double[] speeds) { 
-        for (int i = 0; i < speeds.length; i++) {
-            if (Math.abs(speeds[i]) < Constants.DEADBAND) {
-                speeds[i] = 0.0;
-            }
+    public double deadband(double speed) { 
+        if (Math.abs(speed) < Constants.DEADBAND) {
+            speed = 0.0;
         }
-
-        return speeds;
+        return speed;
     }
 }
