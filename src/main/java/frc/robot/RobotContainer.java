@@ -7,11 +7,14 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Driving;
 import frc.robot.examples.ExampleCommand;
 import frc.robot.examples.ExampleSubsystem;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.commands.Manipulate;
+import frc.robot.subsystems.Top;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -27,13 +30,20 @@ public class RobotContainer {
     // Initialize our joystick for manipulation and controller for drivetrain.
     // public static final Joystick manipulatorControl = new Joystick(0);
     public static final XboxController driverControl = new XboxController(0);
+    public static final CommandXboxController topControl = new CommandXboxController(0);
+
     // Create new subsystems for the robot to pull from.
     private static DriveTrain driveTrain = new DriveTrain(); 
+    private final Manipulate manipulate = new Manipulate(new Top());
 
     /** 
      * The container for the robot. Contains subsystems, OI devices, and commands. 
      */
     public RobotContainer() {
+        // Bindings
+        topControl.rightBumper().onTrue(manipulate.rightCommand);
+        topControl.leftBumper().onTrue(manipulate.leftCommand);
+        
         // Add a new Driving command to the drivetrain.
         driveTrain.setDefaultCommand(new Driving(driveTrain));
         

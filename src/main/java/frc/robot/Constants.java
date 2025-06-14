@@ -13,6 +13,7 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static double TOP_THROTTLE = 1.0;
     /** The multipler of the speed of the drivetrain. */
     public static double THROTTLE = 1.0;
     
@@ -27,6 +28,11 @@ public final class Constants {
 
     /** The second port of the right drivetrain motor. */
     public static final int RIGHT_MOTOR_PORT_2 = 4;
+
+    public static final int RIGHT_TOP_MOTOR = 5;
+
+    public static final int LEFT_TOP_MOTOR = 0;
+
 
     /** The expiration time for the motor's safety. */
     public static final int EXPIRATION_TIME = Integer.MAX_VALUE;
