@@ -13,9 +13,13 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static double TOP_THROTTLE = 1.0;
+    public static double TOP_THROTTLE = 0.75;
+
+    // 15deg @ 0.25 = 25 ft
+    // 20deg @ 0.5 = 45 ft
+    // 20deg @ 0.75 = 55 ft
     /** The multipler of the speed of the drivetrain. */
-    public static double THROTTLE = 1.0;
+    public static double THROTTLE = 0.5;
     
     /** The first port of the left drivetrain motor. */
     public static final int LEFT_MOTOR_PORT_1 = 1;
@@ -29,9 +33,11 @@ public final class Constants {
     /** The second port of the right drivetrain motor. */
     public static final int RIGHT_MOTOR_PORT_2 = 4;
 
-    public static final int RIGHT_TOP_MOTOR = 5;
+    public static final int SERVO_PORT = 8;
 
-    public static final int LEFT_TOP_MOTOR = 0;
+    public static final int RIGHT_TOP_MOTOR = 1;
+
+    public static final int LEFT_TOP_MOTOR = 2;
 
 
     /** The expiration time for the motor's safety. */
@@ -43,7 +49,11 @@ public final class Constants {
     /** The toggle for reversed movement controls. */
     public static final int RIGHT_MULTIPLER = 1; 
     public static final int LEFT_MULTIPLER = -1; 
-    
+
+    public static final int REST_ANGLE = 190;
+    public static final int SHOOT_ANGLE = 100;
+    public static final int LOAD_ANGLE = 135;
+    //
     /** The deadband for the joysticks to prevent small, irregular movements. */
     public static final double DEADBAND = 0.2; 
 }
