@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
@@ -18,6 +19,14 @@ public class Driving extends Command {
     private double left;
     private double right;
 
+    public Command downshiftCommand = Commands.runOnce(() -> {
+        driveTrain.downshift();
+    });
+
+    public Command upshiftCommand = Commands.runOnce(() -> {
+        driveTrain.upshift();
+    });
+
     /**
      * Initialize our driving commands through our DriveTrain subsystem.
 
@@ -27,6 +36,8 @@ public class Driving extends Command {
         this.driveTrain = driveTrain; 
         addRequirements(this.driveTrain); 
     }
+
+
 
     /** 
      * Find controller positions and drive at that speed. This is run every time the command is scheduled, which is in a loop.
