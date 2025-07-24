@@ -5,13 +5,10 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Driving;
-import frc.robot.examples.ExampleCommand;
-import frc.robot.examples.ExampleSubsystem;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.Manipulate;
 import frc.robot.subsystems.Top;
@@ -24,8 +21,6 @@ import frc.robot.subsystems.Top;
  */
 public class RobotContainer {
     // The robot's subsystems and commands are defined here...
-    private final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
-    private final ExampleCommand autoCommand = new ExampleCommand(exampleSubsystem);
 
     // Initialize our joystick for manipulation and controller for drivetrain.
     // public static final Joystick manipulatorControl = new Joystick(0);
@@ -35,17 +30,27 @@ public class RobotContainer {
     // Create new subsystems for the robot to pull from.
     private static DriveTrain driveTrain = new DriveTrain(); 
     private final Manipulate manipulate = new Manipulate(new Top());
+    public Driving driver = new Driving(driveTrain);
 
     /** 
      * The container for the robot. Contains subsystems, OI devices, and commands. 
      */
     public RobotContainer() {
+
+        
         // Bindings
-        topControl.rightBumper().onTrue(manipulate.rightCommand);
-        topControl.leftBumper().onTrue(manipulate.leftCommand);
+        topControl.leftBumper().onChange(manipulate.left);
+
+        
+        topControl.rightBumper().onChange(manipulate.right);
+        topControl.a().onChange(manipulate.servoLoad);
+        topControl.x().onChange(manipulate.servo);
+        
+        topControl.povDown().onTrue(driver.downshiftCommand);
+        topControl.povUp().onTrue(driver.upshiftCommand);
         
         // Add a new Driving command to the drivetrain.
-        driveTrain.setDefaultCommand(new Driving(driveTrain));
+        driveTrain.setDefaultCommand(driver);
         
         // Configure the button bindings
         configureButtonBindings();
@@ -66,6 +71,6 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return autoCommand;
+        return null;
     }
 }
