@@ -27,6 +27,8 @@ public class DriveTrain extends SubsystemBase {
     private final MotorControllerGroup rightMotors = new MotorControllerGroup(right1, right2);
     private final DifferentialDrive diffDrive = new DifferentialDrive(leftMotors, rightMotors);
 
+    private double gearMultiplier = 0.4;
+
     /** 
      * Constructor for the DriveTrain subsystem. 
      * This is where we set up the motors and their properties.
@@ -43,8 +45,22 @@ public class DriveTrain extends SubsystemBase {
      * @param movementSpeedRight - The movement speed of the right set of motors. 
      */
     public void tankDrive(double movementSpeedLeft, double movementSpeedRight) {
-        leftMotors.set(movementSpeedLeft * Constants.LEFT_MULTIPLER);
-        rightMotors.set(movementSpeedRight * Constants.RIGHT_MULTIPLER);
+        leftMotors.set(movementSpeedLeft * Constants.LEFT_MULTIPLER * gearMultiplier);
+        rightMotors.set(movementSpeedRight * Constants.RIGHT_MULTIPLER * gearMultiplier);
+    }
+
+    public void downshift() {
+        gearMultiplier = gearMultiplier-0.1;
+        if (gearMultiplier < 0) {
+            gearMultiplier = 0;
+        }
+    }
+
+    public void upshift() {
+        gearMultiplier = gearMultiplier+0.1;
+        if (gearMultiplier > 1) {
+            gearMultiplier = 1;
+        }
     }
 
     /**
